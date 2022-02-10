@@ -1,0 +1,21 @@
+import pygame
+pygame.init()
+
+#génerer la fenétre du jeu
+
+pygame.display.set_caption("the sympathetic game")
+# édition de la taille de la fenêtre qui prend environ tout l'écran de jeu
+pygame.display.set_mode((1500,1500))
+
+#boucle tant que cette condition et vraie
+running=True
+
+while running:
+
+    #si le joueur ferme la fenetre
+    for event in pygame.event.get():
+        #que l'evenemenet est fermeture de fenetre
+        if event.type== pygame.QUIT:
+            running=False
+            pygame.quit
+            print("fermeture du jeu")
