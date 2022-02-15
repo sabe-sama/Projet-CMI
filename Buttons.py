@@ -1,5 +1,3 @@
-from turtle import onclick
-from typing_extensions import Self
 import pygame
 
 is_happy =True
@@ -32,3 +30,12 @@ class Lose_Button(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 690
         self.rect.y = 450
+
+class Play_Button(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('assets/play_button.png')
+        self.image = pygame.transform.scale(self.image, (300, 300))
+        self.rect = self.image.get_rect()
+        self.rect.x = 210
+        self.rect.y = 90
