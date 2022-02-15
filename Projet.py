@@ -25,11 +25,11 @@ background = pygame.transform.scale(background, (720, 480))
 # On charge Bob.
 bob = Bob()
 # On charge les bouttons "Plau","gagner" et "perdre".
-win_Button = WinButton()
-lose_Button = LoseButton()
+win_button = WinButton()
+lose_button = LoseButton()
 p_button = PlayButton()
 # On charge les bulles.
-Bulle_1 = Bubble()
+bulle_1 = Bubble()
 
 titlescreen = True
 # On crée la varible "running". Elle vaut "True" tant quand le jeu tourne. 
@@ -76,10 +76,10 @@ while running:
     # On affiche Bob.
     screen.blit(bob.image, bob.rect)
     # On affiche les bouttons "gagner" et "perdre".
-    screen.blit(win_Button.image, win_Button.rect)
-    screen.blit(lose_Button.image, lose_Button.rect)
+    screen.blit(win_button.image, win_button.rect)
+    screen.blit(lose_button.image, lose_button.rect)
     # On affiche les bulles.
-    screen.blit(Bulle_1.image, Bulle_1.rect) 
+    screen.blit(bulle_1.image, bulle_1.rect)
     # mettre à jour l'écran
     pygame.display.flip()
     # applique le bouton qui démarre le jeu
@@ -92,7 +92,7 @@ while running:
             pygame.quit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             # vérfication si la souris a touché le bouton play
-            if win_Button.rect.collidepoint(event.pos):
+            if win_button.rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancer
                 # Game.is_playing = True
                 win = True
