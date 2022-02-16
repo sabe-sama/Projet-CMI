@@ -6,8 +6,6 @@ is_happy = True
 class Bob(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.maxhealth = 1000
-        self.health = 1000 
         if is_happy:
             self.image = pygame.image.load('assets/LeMecQuiParle.png')
         else:
@@ -50,8 +48,9 @@ class ReplayButton(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('assets/rejouer.png')
+        self.image = pygame.transform.scale(self.image, (200, 50))
         self.rect = self.image.get_rect()
-        self.rect.x = 50
+        self.rect.x = 100
         self.rect.y = 300
 
 
@@ -59,6 +58,7 @@ class QuitButton(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('assets/quitter.png')
+        self.image = pygame.transform.scale(self.image, (200, 50))
         self.rect = self.image.get_rect()
-        self.rect.x = 350
+        self.rect.x = 400
         self.rect.y = 300
