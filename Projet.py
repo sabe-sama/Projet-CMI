@@ -31,16 +31,25 @@ lose_button = LoseButton()
 p_button = PlayButton()
 replay_button = ReplayButton()
 quit_button = QuitButton()
+
+lose_button2 = LoseButton2()
+lose_button3 = LoseButton3()
+lose_button4 = LoseButton4()
+lose_button5 = LoseButton5()
+win_button2 = WinButton2()
 # On défini des variables associées aux bulles qu'utilisera bob.
 bubble_1 = Bubble1()
 bubble_2 = Bubble2()
 bubble_3 = Bubble3()
+bubble_4 = BubbleLv1Part2()
 # On crée la varible "running". Elle vaut "True" tant quand le jeu tourne. 
 running = True
 # Cette variable nous sert à initier une boucle while, qui nous permet de faire tourner le jeu.
 
 titlescreen = True
+lv1part2 = False
 sadness = 0
+buttoncounter = 0
 
 
 def show_game_over():
@@ -80,6 +89,8 @@ while running:
     if not win:
         while titlescreen:
             sadness = 0
+            buttoncounter = 0
+            lv1part2 = False
             background = pygame.image.load('assets/1.JPEG')
             background = pygame.transform.scale(background, (720, 480))
             screen.blit(background, (0, 0))
@@ -100,19 +111,51 @@ while running:
 
     screen.blit(background, (0, 0))
     # On affiche Bob.
-    if sadness == 0:
+    if lv1part2:
+        screen.blit(lose_button5.image, lose_button5.rect)
+        screen.blit(win_button2.image, win_button2.rect)
+        screen.blit(bubble_4.image, bubble_4.rect)
+        screen.blit(bob.image, bob.rect)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                running = False
+                pygame.quit()
+            if event.type == pygame.MOUSEMOTION:
+                if lose_button5.rect.collidepoint(event.pos):
+                    win_button2.rect.x = 570
+                    lose_button5.rect.x = 50
+                    screen.blit(win_button2.image, win_button2.rect)
+                    screen.blit(lose_button5.image, lose_button5.rect)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if lose_button5.rect.collidepoint(event.pos):
+                    pygame.quit()
+                if win_button2.rect.collidepoint(event.pos):
+                    win_button2.rect.x = 50
+                    lose_button5.rect.x = 570
+                    show_game_over()
+
+    elif sadness == 0:
         screen.blit(bob.image, bob.rect)
         screen.blit(bubble_1.image, bubble_1.rect)
     elif sadness == 1:
         screen.blit(sad_bob.image, sad_bob.rect)
         screen.blit(bubble_2.image, bubble_2.rect)
-    elif sadness == 2:
+    elif sadness >= 2:
         screen.blit(uncanny_bob.image, uncanny_bob.rect)
         screen.blit(bubble_3.image, bubble_3.rect)
 
     # On affiche les bouttons "gagner" et "perdre".
-    screen.blit(win_button.image, win_button.rect)
-    screen.blit(lose_button.image, lose_button.rect)
+    if not lv1part2:
+        screen.blit(win_button.image, win_button.rect)
+        if sadness <= 2:
+            screen.blit(lose_button.image, lose_button.rect)
+        elif buttoncounter == 0:
+            screen.blit(lose_button2.image, lose_button2.rect)
+        elif buttoncounter == 1:
+            screen.blit(lose_button3.image, lose_button3.rect)
+        else:
+            screen.blit(lose_button4.image, lose_button4.rect)
     # On affiche les bulles.
     # mettre à jour l'écran
     pygame.display.flip()
@@ -132,17 +175,23 @@ while running:
                 # Game.is_playing = True
                 win = True
             if lose_button.rect.collidepoint(event.pos):
-                sadness += 1
                 if sadness == 0:
+                    sadness += 1
                     screen.blit(bob.image, bob.rect)
                     screen.blit(bubble_1.image, bubble_1.rect)
                 elif sadness == 1:
+                    sadness += 1
                     screen.blit(sad_bob.image, sad_bob.rect)
                     screen.blit(bubble_2.image, bubble_2.rect)
-                elif sadness == 2:
-                    screen.blit(uncanny_bob.image, uncanny_bob.rect)
-                    screen.blit(bubble_3.image, bubble_3.rect)
-                pygame.display.flip()
+                elif sadness >= 2:
+                    sadness += 1
+            if lose_button2.rect.collidepoint(event.pos):
+                buttoncounter += 1
+            if lose_button3.rect.collidepoint(event.pos):
+                buttoncounter += 1
+            if lose_button4.rect.collidepoint(event.pos):
+                lv1part2 = True
+            pygame.display.flip()
 
         if win:
             show_game_over()

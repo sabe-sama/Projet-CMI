@@ -29,3 +29,13 @@ class Bubble3(pygame.sprite.Sprite):
         self.rect = self.image.get_rect() 
         self.rect.x = 420
         self.rect.y = 80
+
+
+class BubbleLv1Part2(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('assets/bulles/Bulle_lv1part2.png')
+        self.image = pygame.transform.scale(self.image, (150, 150))
+        self.rect = self.image.get_rect()
+        self.rect.x = 420
+        self.rect.y = 0
