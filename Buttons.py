@@ -3,19 +3,6 @@ import pygame
 is_happy = True
 
 
-class Bob(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        if is_happy:
-            self.image = pygame.image.load('assets/LeMecQuiParle.png')
-        else:
-            self.image = pygame.image.load('assets/sad.JPEG')
-        self.image = pygame.transform.scale(self.image, (120, 120))
-        self.rect = self.image.get_rect() 
-        self.rect.x = 300
-        self.rect.y = 180
-
-
 class WinButton(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
