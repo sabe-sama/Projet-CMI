@@ -44,3 +44,21 @@ class PlayButton(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 210
         self.rect.y = 90
+
+
+class ReplayButton(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('assets/rejouer.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = 50
+        self.rect.y = 300
+
+
+class QuitButton(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('assets/quitter.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = 350
+        self.rect.y = 300

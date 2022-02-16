@@ -1,6 +1,8 @@
 # On importe les modules dont nous avons besoin. 
 import time
 # On importe également le contenu de nos autres fichiers relatifs au jeu.
+import pygame.event
+
 from game import *
 from Buttons import *
 from bulles import *
@@ -24,10 +26,12 @@ background = pygame.transform.scale(background, (720, 480))
 
 # On charge Bob.
 bob = Bob()
-# On charge les bouttons "Plau","gagner" et "perdre".
+# On charge les bouttons "Play","gagner" et "perdre".
 win_button = WinButton()
 lose_button = LoseButton()
 p_button = PlayButton()
+replay_button = ReplayButton()
+quit_button = QuitButton()
 # On charge les bulles.
 bulle_1 = Bubble()
 
@@ -39,12 +43,30 @@ gameOver = GameOver()
 
 
 def show_game_over():
-    global titlescreen, win
-    screen.blit(gameOver.image, gameOver.rect)
-    pygame.display.flip()
-    time.sleep(1)
-    titlescreen = True
-    win = False
+    global titlescreen, win, running, event
+    run = True
+    while run:
+        bg = pygame.image.load('assets/GameOver.JPEG')
+        bg = pygame.transform.scale(bg, (720, 480))
+        screen.blit(bg, (0, 0))
+        screen.blit(replay_button.image, replay_button.rect)
+        screen.blit(quit_button.image, quit_button.rect)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                running = False
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # vérfication si la souris a touché le bouton rejouer
+                if quit_button.rect.collidepoint(event.pos):
+                    run = False
+                    running = False
+                    pygame.quit()
+                if replay_button.rect.collidepoint(event.pos):
+                    win = False
+                    titlescreen = True
+                    run = False
 
 
 win = False
