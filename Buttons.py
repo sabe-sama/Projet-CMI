@@ -21,6 +21,19 @@ class LoseButton(pygame.sprite.Sprite):
         self.rect.y = 450
 
 
+<<<<<<< Updated upstream
+=======
+class LoseButton5(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('assets/Lose_button.png')
+        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.rect = self.image.get_rect()
+        self.rect.x = 570
+        self.rect.y = 190
+
+
+>>>>>>> Stashed changes
 class PlayButton(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
